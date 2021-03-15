@@ -1,0 +1,165 @@
+---
+title: "Everest Bio"
+output: 
+  flexdashboard::flex_dashboard:
+    #storyboard: true
+    orientation: rows
+    logo: https://raw.githubusercontent.com/fabbiocrux/Figures/main/Everest-bio/logos/favicon-tool.png
+    #vertical_layout: scroll
+    social: menu
+#date: "Version of the Document:  `r format(Sys.time(), '%d %B, %Y')`" 
+#author: "Université de Lorraine"
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,  include=FALSE, warning = FALSE, message = FALSE)
+#source()
+library(leaflet)
+
+```
+
+
+# Goal {.sidebar data-icon="fa-signal"}
+**Goal of WP 4.1 :**
+
+> The main purpose of task 4.1 is to describe and define the needs of each demonstrator in order to establish a common base. Thus, each physical demonstrator shall be observed, and specific data of the processes shall be collected with the purpose to create a holistic framework of open manufacturing demonstration facility.
+
+<a href = "https://erpi.univ-lorraine.fr/">Made by Université de Lorraine</a>
+
+
+# DIT {data-icon="fa-bullseye"}
+## Row {.tabset .tabset-fade}
+### Global DIT process
+
+![Do-It-Together Process](www/images/DIT.svg)
+
+### Local Ecosystem 
+```{r}
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="Lorraine Fab Living Lab")
+m  # Print the map
+
+```
+
+### Specific DIT Process
+```{r}
+
+```
+
+
+
+# Global analysis {data-icon="fa-diagnoses"} 
+## Row {.tabset .tabset-fade}
+
+### Impact Matrix    
+```{r}
+
+```
+
+
+### Global DIT Vs. Use cases
+
+```{r}
+
+```
+
+
+### Specific DIT Vs. Use cases
+
+
+
+
+
+# AIMEN  {data-icon="fa-id-card"}
+
+Row {.tabset .tabset-fade}
+-------------------------------------
+   
+### Global Description
+```{r}
+
+```
+
+
+### Expected results
+```{r}
+
+```
+
+
+
+### Innovations
+```{r}
+
+```
+
+
+### Impacts
+```{r}
+
+```
+
+
+
+
+
+# UL  {data-icon="fa-id-card"}
+## Row {.tabset .tabset-fade}
+
+### Global Description
+```{r}
+
+```
+
+
+### Expected results
+```{r}
+
+```
+
+
+### Innovations
+```{r}
+
+```
+
+
+### Impacts
+```{r}
+
+```
+
+
+
+
+# UNINOVA  {data-icon="fa-id-card"}
+## Row {.tabset .tabset-fade}
+
+### Global Description
+```{r}
+
+```
+
+### Expected results
+```{r}
+
+```
+
+### Innovations
+```{r}
+
+```
+
+### Impacts
+```{r}
+
+```
+
+
+
+
