@@ -15,91 +15,82 @@ editor_options:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,  include=FALSE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE,  include=TRUE, warning = FALSE, message = FALSE)
 #source()
 library(leaflet)
+library(tidyverse)
+
+# Link for the Figures
+URL = c('https://raw.githubusercontent.com/fabbiocrux/Figures/main/')
 
 ```
 
 
 # Goal {.sidebar data-icon="fa-signal"}
-**Goal of WP 4.1 :**
+**Goal of Everest Bio :**
 
-> The main purpose of task 4.1 is to describe and define the needs of each demonstrator in order to establish a common base. Thus, each physical demonstrator shall be observed, and specific data of the processes shall be collected with the purpose to create a holistic framework of open manufacturing demonstration facility.
+> To develop a generic methodology to assess the **ecosystem services** rendered by industrial activities operating in short circuit in order to improve decision-making by industrial and public actors. 
+.
 
 <a href = "https://erpi.univ-lorraine.fr/">Made by Université de Lorraine</a>
 
 
-# DIT {data-icon="fa-bullseye"}
+# DRAM {data-icon="fa-bullseye"}
 ## Row {.tabset .tabset-fade}
-### Global DIT process
 
-![Do-It-Together Process](www/images/DIT.svg)
+### Technical System
 
-### Local Ecosystem 
-```{r}
+```{r, include=TRUE, out.width = '500px', fig.align='center'}
+knitr::include_graphics(paste0(URL, 'DRAM/DRAM-10.png'))
+```
+
+
+### Processes
+
+
+
+# Territorial Evaluation {data-icon="fa-diagnoses"} 
+## Row {.tabset .tabset-fade}
+
+### Local Ecosystem
+```{r, include=TRUE}
 
 m <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="Lorraine Fab Living Lab")
+  addMarkers(lng=48.69403, lat=6.19945, popup="Lorraine Fab Living Lab")
 m  # Print the map
 
 ```
 
-### Specific DIT Process
-```{r}
+
+### SWOT of the Territory
+
+```{r, include=TRUE, out.width = '500px', fig.align='center'}
+knitr::include_graphics('https://img-0.journaldunet.com/tg9XQ2MYaOBU9SDaNxGwGCY1DSI=/1280x/smart/022985dd6e36426bb6228be98a162047/ccmcms-jdn/23237807.jpg')
 
 ```
 
 
-
-# Global analysis {data-icon="fa-diagnoses"} 
-## Row {.tabset .tabset-fade}
-
-### Impact Matrix    
-```{r}
-
-```
-
-
-### Global DIT Vs. Use cases
-
-```{r}
-
-```
-
-
-### Specific DIT Vs. Use cases
+### Industrial Ecology?
 
 
 
 
 
-# AIMEN  {data-icon="fa-id-card"}
+# SVA  {data-icon="fa-id-card"}
 
 Row {.tabset .tabset-fade}
 -------------------------------------
    
-### Global Description
-```{r}
+### Stakeholders
+
+```{r, include=TRUE, out.width = '500px', fig.align='center'}
+knitr::include_graphics('https://www.edrawsoft.com/templates/images/stakeholder-map.png')
 
 ```
 
 
-### Expected results
-```{r}
-
-```
-
-
-
-### Innovations
-```{r}
-
-```
-
-
-### Impacts
+### SVN
 ```{r}
 
 ```
@@ -107,29 +98,17 @@ Row {.tabset .tabset-fade}
 
 
 
-
-# UL  {data-icon="fa-id-card"}
+# Ecosystem Service  {data-icon="fa-id-card"}
 ## Row {.tabset .tabset-fade}
 
 ### Global Description
-```{r}
 
+```{r, out.width = '90%', fig.align='center'}
+knitr::include_graphics(paste0(URL, 'Ecoservices/Vanderwilde2021-00.jpg'))
 ```
 
 
-### Expected results
-```{r}
-
-```
-
-
-### Innovations
-```{r}
-
-```
-
-
-### Impacts
+### Expected impacts
 ```{r}
 
 ```
@@ -137,25 +116,33 @@ Row {.tabset .tabset-fade}
 
 
 
-# UNINOVA  {data-icon="fa-id-card"}
+# LCA  {data-icon="fa-id-card"}
 ## Row {.tabset .tabset-fade}
 
-### Global Description
-```{r}
+### Analysis
 
+```{r, out.width = '90%', fig.align='center'}
+knitr::include_graphics('http://www.avnir.org/documentation/accueil/AvnirSchemaCDVEN_web.jpg')
 ```
+
+
 
 ### Expected results
 ```{r}
 
 ```
 
-### Innovations
-```{r}
 
+# System Dynamics  {data-icon="fa-id-card"}
+## Row {.tabset .tabset-fade}
+
+### Analysis
+```{r, out.width = '90%', fig.align='center'}
+knitr::include_graphics(paste0(URL, 'DRAM/Pavlo-02.png'))
 ```
 
-### Impacts
+
+### Expected results
 ```{r}
 
 ```
