@@ -1,12 +1,16 @@
 ---
 title: "Everest Bio"
 output: 
-  flexdashboard::flex_dashboard:
-    #storyboard: true
-    orientation: rows
-    logo: https://raw.githubusercontent.com/fabbiocrux/Figures/main/Everest-bio/logos/favicon-tool.png
-    #vertical_layout: scroll
-    social: menu
+  learnr::tutorial:
+    progressive: true
+runtime: shiny_prerendered
+# output: 
+#   flexdashboard::flex_dashboard:
+#     #storyboard: true
+#     orientation: rows
+#     logo: https://raw.githubusercontent.com/fabbiocrux/Figures/main/Everest-bio/logos/favicon-tool.png
+#     #vertical_layout: scroll
+#     social: menu
 #date: "Version of the Document:  `r format(Sys.time(), '%d %B, %Y')`" 
 #author: "Université de Lorraine"
 editor_options: 
@@ -19,134 +23,79 @@ knitr::opts_chunk$set(echo = FALSE,  include=TRUE, warning = FALSE, message = FA
 #source()
 library(leaflet)
 library(tidyverse)
+library(shiny)
+library(shinyWidgets)
 
 # Link for the Figures
 URL = c('https://raw.githubusercontent.com/fabbiocrux/Figures/main/')
 
 ```
 
+## Presentation
 
-# Goal {.sidebar data-icon="fa-signal"}
-**Goal of Everest Bio :**
+### Goal of Everest Bio : 
 
 > To develop a generic methodology to assess the **ecosystem services** rendered by industrial activities operating in short circuit in order to improve decision-making by industrial and public actors. 
-.
+
 
 <a href = "https://erpi.univ-lorraine.fr/">Made by Université de Lorraine</a>
 
-
-# DRAM {data-icon="fa-bullseye"}
-## Row {.tabset .tabset-fade}
-
-### Technical System
-
-```{r, include=TRUE, out.width = '500px', fig.align='center'}
-knitr::include_graphics(paste0(URL, 'DRAM/DRAM-10.png'))
-```
-
-
-### Processes
+## Consentement
 
 
 
-# Territorial Evaluation {data-icon="fa-diagnoses"} 
-## Row {.tabset .tabset-fade}
+## Describing
 
-### Local Ecosystem
-```{r, include=TRUE}
-
-m <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=48.69403, lat=6.19945, popup="Lorraine Fab Living Lab")
-m  # Print the map
-
-```
+### Who you are?
 
 
-### SWOT of the Territory
-
-```{r, include=TRUE, out.width = '500px', fig.align='center'}
-knitr::include_graphics('https://img-0.journaldunet.com/tg9XQ2MYaOBU9SDaNxGwGCY1DSI=/1280x/smart/022985dd6e36426bb6228be98a162047/ccmcms-jdn/23237807.jpg')
-
-```
-
-
-### Industrial Ecology?
-
-
-
-
-
-# SVA  {data-icon="fa-id-card"}
-
-Row {.tabset .tabset-fade}
--------------------------------------
-   
-### Stakeholders
-
-```{r, include=TRUE, out.width = '500px', fig.align='center'}
-knitr::include_graphics('https://www.edrawsoft.com/templates/images/stakeholder-map.png')
-
-```
-
-
-### SVN
 ```{r}
 
+fluidPage(
+ prettyRadioButtons(
+   inputId = "radio1",
+   label = "Votre profile est plutôt:",
+   choices = c("Agent Territoirial", "Agent d'Entreprise", "Other"),
+    icon = icon("thumbs-up"),
+   inline = TRUE
+      ))  
+
 ```
 
 
+### Biomass
 
+In the Following, please check as if the  
 
-# Ecosystem Service  {data-icon="fa-id-card"}
-## Row {.tabset .tabset-fade}
-
-### Global Description
-
-```{r, out.width = '90%', fig.align='center'}
-knitr::include_graphics(paste0(URL, 'Ecoservices/Vanderwilde2021-00.jpg'))
-```
-
-
-### Expected impacts
 ```{r}
 
-```
+fluidPage(
+  fluidRow(
+     h4("Are cultivated plants (Terrestrial, Aquatic) strategic for the territory for nutrition, materials or energy ?"), 
+     column(12,
+            switchInput(inputId = "Id011",
+                        label = "Terrestrial", 
+                        onStatus = "success",
+                        offStatus = "danger",
+                        onLabel = "Yes",
+                        offLabel = "No"
+                        )
+            ),
+     column(12,
+            switchInput(inputId = "Id011",
+                        label = "Aquatic", 
+                        onStatus = "success",
+                        offStatus = "danger",
+                        onLabel = "Yes",
+                        offLabel = "No"
+                        )
+            )
+    
+  )
 
+)  
 
-
-
-# LCA  {data-icon="fa-id-card"}
-## Row {.tabset .tabset-fade}
-
-### Analysis
-
-```{r, out.width = '90%', fig.align='center'}
-knitr::include_graphics('http://www.avnir.org/documentation/accueil/AvnirSchemaCDVEN_web.jpg')
-```
-
-
-
-### Expected results
-```{r}
-
-```
-
-
-# System Dynamics  {data-icon="fa-id-card"}
-## Row {.tabset .tabset-fade}
-
-### Analysis
-```{r, out.width = '90%', fig.align='center'}
-knitr::include_graphics(paste0(URL, 'DRAM/Pavlo-02.png'))
-```
-
-
-### Expected results
-```{r}
 
 ```
-
-
 
 
