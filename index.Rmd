@@ -19,15 +19,60 @@ editor_options:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,  include=TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, include=TRUE, warning = FALSE, message = FALSE, cache = FALSE)
 #source()
 library(leaflet)
 library(tidyverse)
 library(shiny)
 library(shinyWidgets)
+library(readxl)
+library(here)
 
 # Link for the Figures
 URL = c('https://raw.githubusercontent.com/fabbiocrux/Figures/main/')
+
+```
+
+
+
+
+
+```{r CICES, include=FALSE, echo=FALSE}
+
+CICES <- read_excel(here("CICES/CICES-Questionnaire.xlsx"), sheet = "CICES V5.1",  skip = 4 )
+names(CICES)
+
+#Test <- 
+#  CICES %>% select(Division, Group, Class, Code, `Class type`, `Simple descriptor`)
+  #mutate(ID = paste0(Division,Code))
+
+
+# Ordering the Factors
+Test <- CICES %>%
+  mutate(Division = factor(Division, CICES %>% pull(Division) %>% unique())) %>% 
+  mutate(Group = factor(Group, CICES %>% pull(Group) %>% unique())) %>% 
+  mutate(Labels = factor(Labels, CICES %>% pull(Labels) %>% unique())) %>% 
+  mutate(Question_Territorial = factor(Question_Territorial)) %>% 
+  mutate(ID_Q = tolower(gsub(" ","", Labels)))
+
+# Fill the Voids 
+Test <- Test %>%  
+  fill(Question_Territorial) %>% 
+  fill(Question_Entreprise) %>% 
+  fill(Questions) %>% 
+  fill(Labels) %>% 
+  fill(ID_Q)
+
+# Creating ID
+Test <- Test %>%  mutate(ID = Code) 
+  
+
+# Funciones para el cuestionario
+source("R/ES_Preguntas.R")
+source("R/ES_Division.R")
+source("R/ES_Descriptor.R")
+source("R/ES_Questions.R")
+
 
 ```
 
@@ -42,60 +87,68 @@ URL = c('https://raw.githubusercontent.com/fabbiocrux/Figures/main/')
 
 ## Consentement
 
+>Here we will pute the consentement according to the GRPD
 
-
-## Describing
+## Let's us know your profile
 
 ### Who you are?
 
 
 ```{r}
-
 fluidPage(
- prettyRadioButtons(
-   inputId = "radio1",
-   label = "Votre profile est plutôt:",
-   choices = c("Agent Territoirial", "Agent d'Entreprise", "Other"),
-    icon = icon("thumbs-up"),
-   inline = TRUE
-      ))  
-
+  awesomeRadio(
+   inputId = "Perfil",
+   label = "Your profile is:", 
+    choices = c("Territorial agent"="Territorial", "Entreprise agent"="Entreprise", "Citizen"="Citizen"),
+   #selected = "B",
+   status = "warning"
+)
+)
 ```
 
+
+```{r, context="server"}
+observeEvent(input$Perfil, {
+   cat("Selection is:", input$Perfil )
+  })
+
+
+output$Question <- renderUI({
+  
+ if (input$Perfil  == 'Territorial') {
+    h4(vars$Question_Territorial[1]) 
+    #vars <-  vars %>% mutate(Questions_description = Question_Territorial)
+    #paste("You have selected", input$Perfil)
+   } else if (input$Perfil == 'Entreprise') {
+     h4(vars$Question_Entreprise[1]) 
+     #vars <-  vars %>% mutate(Questions_description = Question_Entreprise)
+   }
+
+})
+```
+
+
+## ES: Provisioning
 
 ### Biomass
 
-In the Following, please check as if the  
+In the following questions, please check the variables that are true for you case
 
-```{r}
 
+```{r Biomass_Plants}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "A") 
 fluidPage(
-  fluidRow(
-     h4("Are cultivated plants (Terrestrial, Aquatic) strategic for the territory for nutrition, materials or energy ?"), 
-     column(12,
-            switchInput(inputId = "Id011",
-                        label = "Terrestrial", 
-                        onStatus = "success",
-                        offStatus = "danger",
-                        onLabel = "Yes",
-                        offLabel = "No"
-                        )
-            ),
-     column(12,
-            switchInput(inputId = "Id011",
-                        label = "Aquatic", 
-                        onStatus = "success",
-                        offStatus = "danger",
-                        onLabel = "Yes",
-                        offLabel = "No"
-                        )
-            )
-    
-  )
-
-)  
-
-
+fluidRow( 
+  uiOutput("Question"),
+  column(4, vars %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
 ```
+
+ddd
+
 
 

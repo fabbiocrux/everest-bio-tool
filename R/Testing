@@ -1,0 +1,319 @@
+
+```{r Biomass_Plants}
+
+Preguntas <- ES_Preguntas(1,1)
+
+fluidPage(
+  fluidRow(
+    h4("Are cultivated plants (Terrestrial or Aquatic) strategic for the territory for nutrition, materials or energy ?"), 
+    
+    # Biomass
+    column(12,
+           switchInput(inputId = "Biomass_Cultivated_Terrestrial",
+                       label = "Terrestrial", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Cultivated_Terrestrial == true",
+             checkboxInput(Preguntas(1, 1)$Code[1], Preguntas(1, 1)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 1)$Code[2], Preguntas(1, 1)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 1)$Code[3], Preguntas(1, 1)$`Simple descriptor`[3])
+           )),
+  ),
+ 
+   fluidRow(
+    
+     # Biomass
+    column(12,
+           switchInput(inputId = "Biomass_Cultivated_Aquatic",
+                       label = "Aquatic", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Cultivated_Aquatic == true",
+             checkboxInput(Preguntas(1, 2)$Code[1], Preguntas(1, 2)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 2)$Code[2], Preguntas(1, 2)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 2)$Code[3], Preguntas(1, 2)$`Simple descriptor`[3])
+           )),
+  )
+  
+)  
+
+```
+
+
+
+
+```{r Biomass_Animals}
+
+fluidPage(
+  fluidRow(
+    h4("Are **Reared animals** (Terrestrial or Aquatic) strategic for the   territory for nutrition, materials or energy ?"), 
+    
+    # Biomass
+    column(12,
+           switchInput(inputId = "Biomass_Reared_Animals",
+                       label = "Terrestrial", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Reared_Animals == true",
+             checkboxInput(Preguntas(1, 3)$Code[1], Preguntas(1, 3)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 3)$Code[2], Preguntas(1, 3)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 3)$Code[3], Preguntas(1, 3)$`Simple descriptor`[3])
+           )),
+  ),
+ 
+  
+# Biomass
+   fluidRow(
+    column(12,
+           switchInput(inputId = "Biomass_Reared_Aquatic",
+                       label = "Aquatic", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Reared_Aquatic == true",
+             checkboxInput(Preguntas(1, 4)$Code[1], Preguntas(1, 4)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 4)$Code[2], Preguntas(1, 4)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 4)$Code[3], Preguntas(1, 4)$`Simple descriptor`[3]),
+           )),
+  )
+  
+)  
+
+
+
+
+```
+
+
+```{r Biomass_Wild}
+fluidPage(
+  fluidRow(
+    h4('Are Wild Plants  (terrestrial and aquatic) strategic for the territory for nutrition, materials or energy ?'), 
+    
+    # Biomass
+    column(12,
+           
+           switchInput(inputId = "Biomass_Wild_Plants",
+                       label = "Wild Plants", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Wild_Plants == true",
+             checkboxInput(Preguntas(1, 5)$Code[1], Preguntas(1, 5)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 5)$Code[2], Preguntas(1, 5)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 5)$Code[3], Preguntas(1, 5)$`Simple descriptor`[3])
+           )),
+  ),
+ 
+  
+# Biomass
+   fluidRow(
+    column(12,
+           switchInput(inputId = "Biomass_Wild_Animals",
+                       label = "Wild Animals", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Wild_Animals == true",
+             checkboxInput(Preguntas(1, 6)$Code[1], Preguntas(1, 6)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 6)$Code[2], Preguntas(1, 6)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 6)$Code[3], Preguntas(1, 6)$`Simple descriptor`[3]),
+           )),
+  )
+  
+)  
+```
+
+
+### Genetic material from all biota 
+
+```{r Biomass_Genetic}
+fluidPage(
+  fluidRow(
+    h4('Is the Genetic material from plants, algae or fungi (including seed, spore or gamete production) an important element for the territory ?'), 
+
+  # Genertic Plants
+    column(12,
+           switchInput(inputId = "Biomass_Genetic_Plants",
+                       label = "From Plants, algae or fungi", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Genetic_Plants == true",
+             checkboxInput(Preguntas(2, 7)$Code[1], Preguntas(2, 7)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(2, 7)$Code[2], Preguntas(2, 7)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(2, 7)$Code[3], Preguntas(2, 7)$`Simple descriptor`[3])
+           )),
+  ),
+ 
+  
+# Genertic Animals
+   fluidRow(
+    column(12,
+           switchInput(inputId = "Biomass_Genetic_Animals",
+                       label = "From animals", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Wild_Animals == true",
+             checkboxInput(Preguntas(2, 8)$Code[1], Preguntas(2, 8)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(2, 8)$Code[2], Preguntas(2, 8)$`Simple descriptor`[2]),
+             #checkboxInput(Preguntas(1, 6)$Code[3], Preguntas(1, 6)$`Simple descriptor`[3])
+           ))
+  ),
+
+
+# Genertic Animals
+   fluidRow(
+    column(12,
+           switchInput(inputId = "Biomass_Genetic_Organism",
+                       label = "From organism", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Genetic_Organism == true",
+             checkboxInput(Preguntas(2, 9)$Code[1], Preguntas(2, 9)$`Simple descriptor`[1]),
+             #checkboxInput(Preguntas(2, 9)$Code[2], Preguntas(2, 9)$`Simple descriptor`[2]),
+             #checkboxInput(Preguntas(1, 6)$Code[3], Preguntas(1, 6)$`Simple descriptor`[3])
+           ))
+  )  
+)  
+```
+
+
+
+```{r}
+fluidPage(
+  fluidRow(
+  
+    column(12,
+           textAreaInput(Preguntas(3, 10)$Code[1], "Are other types of provisioning services from biotic sources,that are important for the territory ?", "For example: xxxx to complete xxx")
+           
+    )  
+  )
+)  
+```
+
+
+## ES: Regulation & Maintenance 
+
+
+
+```{r RM_Wild}
+fluidPage(
+  fluidRow(
+    h4('Are Transformation of biochemical or physical inputs to ecosystems that are critical for the territory ?'), 
+    
+    # Biomass
+    column(12,
+           
+           switchInput(inputId = "RM_Wastes",
+                       label = "Mediation of wastes or toxic substances of anthropogenic origin by living processes", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No",
+                       labelWidth = '300px'
+           ),
+           conditionalPanel(
+             condition = "input.RM_Wastes == true",
+             checkboxInput(Preguntas(4, 11)$Code[1], Preguntas(4, 11)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(4, 11)$Code[2], Preguntas(4, 11)$`Simple descriptor`[2])
+           ))
+  ),
+ 
+  
+# Biomass
+   fluidRow(
+    column(12,
+           switchInput(inputId = "Biomass_Wild_Animals",
+                       label = "Wild Animals", 
+                       onStatus = "success",
+                       offStatus = "danger",
+                       onLabel = "Yes",
+                       offLabel = "No"
+           ),
+           conditionalPanel(
+             condition = "input.Biomass_Wild_Animals == true",
+             checkboxInput(Preguntas(1, 6)$Code[1], Preguntas(1, 6)$`Simple descriptor`[1]),
+             checkboxInput(Preguntas(1, 6)$Code[2], Preguntas(1, 6)$`Simple descriptor`[2]),
+             checkboxInput(Preguntas(1, 6)$Code[3], Preguntas(1, 6)$`Simple descriptor`[3]),
+           )),
+  )
+)  
+```
+
+
+
+## Test
+
+```{r, include=FALSE, eval=FALSE}
+
+vars <- Preguntas(1, 6)
+fluidPage(
+fluidRow( 
+  h4("Are **Reared animals** (Terrestrial or Aquatic) strategic for the   territory for nutrition, materials or energy ?") ,
+  
+  Q_switch("test", "test" ) ,
+  Q_cond("test", vars)
+  )
+)
+```
+
+
+
+```{r, context="server"}
+
+Respuestas <- reactive({
+    
+  # this is how you fetch the input variables from ui component
+    `1.1.1.1` <- as.character(input$`1.1.1.1`)
+    Var2 <- as.character(input$`1.1.1.2`)
+    
+    test <- cbind(`1.1.1.1`, Var2)
+    test <- as.data.frame(test)
+
+})
+
+# Observing the datafram
+observe({print(Respuestas())}) 
+
+Divisiones
+```
+
+
+
+
+
+
+### Other types of provisioning service
