@@ -42,9 +42,8 @@ URL = c('https://raw.githubusercontent.com/fabbiocrux/Figures/main/')
 CICES <- read_excel(here("CICES/CICES-Questionnaire.xlsx"), sheet = "CICES V5.1",  skip = 4 )
 names(CICES)
 
-#Test <- 
-#  CICES %>% select(Division, Group, Class, Code, `Class type`, `Simple descriptor`)
-  #mutate(ID = paste0(Division,Code))
+# Filtering only CICES
+CICES <- CICES %>% filter(Filter == "CICES")
 
 
 # Ordering the Factors
@@ -53,7 +52,8 @@ Test <- CICES %>%
   mutate(Group = factor(Group, CICES %>% pull(Group) %>% unique())) %>% 
   mutate(Labels = factor(Labels, CICES %>% pull(Labels) %>% unique())) %>% 
   mutate(Question_Territorial = factor(Question_Territorial)) %>% 
-  mutate(ID_Q = tolower(gsub(" ","", Labels)))
+  mutate(ID_Q = tolower(gsub(" ","", Labels))) %>% 
+  mutate(ID_Q = tolower(gsub(",","", ID_Q))) 
 
 # Fill the Voids 
 Test <- Test %>%  
@@ -67,13 +67,27 @@ Test <- Test %>%
 Test <- Test %>%  mutate(ID = Code) 
   
 
+A <- Test %>% filter(Questions == "A")
+B <- Test %>% filter(Questions == "B")
+
 # Funciones para el cuestionario
 source("R/ES_Preguntas.R")
 source("R/ES_Division.R")
 source("R/ES_Descriptor.R")
 source("R/ES_Questions.R")
 
+#Veryfing the levels
+#Test$ID %>% as.factor() %>% levels()
 
+
+# Preguntas <- 
+#       Test %>% 
+#       group_by(Section, Division, Group ) %>% tally()
+      #filter(Group == Grupos[j]) %>% 
+      #filter(Labels == Labels[j]) 
+
+#Preguntas <- Preguntas %>% left_join(Test %>% pull(Section, Division))  %>% select(Section, Division:n)    
+      
 ```
 
 ## Presentation
@@ -123,8 +137,25 @@ output$Question <- renderUI({
      h4(vars$Question_Entreprise[1]) 
      #vars <-  vars %>% mutate(Questions_description = Question_Entreprise)
    }
-
 })
+
+# 
+# output$Question <- renderUI({
+# 
+#   column(4, vars %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+#   switchInput(inputId = ID_Q,
+#                label = Labels, 
+#                onStatus = "success",
+#                offStatus = "danger",
+#                onLabel = "Yes",
+#                offLabel = "No"
+#    )
+# 
+# 
+# })
+
+#vars <- Test %>% filter(Questions == "A") 
+#vars <- reactive(Test)
 ```
 
 
@@ -135,20 +166,196 @@ output$Question <- renderUI({
 In the following questions, please check the variables that are true for you case
 
 
-```{r Biomass_Plants}
+```{r Biomass_Plants, eval=TRUE, include=TRUE}
 # Filtering the dataframe
 vars <- Test %>% filter(Questions == "A") 
 fluidPage(
 fluidRow( 
-  uiOutput("Question"),
-  column(4, vars %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
-  column(8, vars %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  #uiOutput("Question"),
+  #
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
   ),
 hr()
 )
 ```
 
-ddd
+
+
+```{r Biomass_Animals,}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "B") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+```
+
+
+
+```{r Biomass_Wild,}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "C") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+```
+
+### Genetic material from all biota (including seed, spore or gamete production)
+
+```{r}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "D") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+```
+
+
+                                            
+
+## ES: Regulation & Maintenance (Biotic)
+
+
+### Transformation of biochemical or physical inputs to ecosystems
+
+```{r}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "F") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+```
+
+
+### Regulation of physical, chemical, biological conditions
+
+```{r}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "G") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+
+
+```
+
+
+
+## ES: Cultural & Information
+
+### Direct, in-situ and outdoor interactions with living systems that depend on presence in the environmental setting
+
+```{r}
+# Filtering the dataframe
+vars <- Test %>% filter(Questions == "H") 
+fluidPage(
+fluidRow( 
+  #uiOutput("Question"),
+  column(4, vars  %>% select(Labels, ID_Q)  %>% unique()  %>% pmap(. , ES_Division)) ,
+  column(8, vars  %>% select(Labels,ID_Q, ID, `Simple descriptor`)  %>%  pmap(. , ES_Descriptor))
+  ),
+hr()
+)
+```
+
+## REsults
+
+                                                     
+```{r}
+fluidPage(
+fluidRow( 
+  actionButton("submit", "Submit"),
+  
+ tableOutput("responses")
+ )
+)
+```
+
+
+
+
+```{r, context="server"}
+# observeEvent(input$`1.1.1.1`, {
+#    cat("Selection is:", input$`1.1.1.1` )
+#   })
+# 
+# 
+# output$Table <- renderUI({
+#   
+#  if (input$Perfil  == 'Territorial') {
+#     h4(vars$Question_Territorial[1]) 
+#     #vars <-  vars %>% mutate(Questions_description = Question_Territorial)
+#     #paste("You have selected", input$Perfil)
+#    } else if (input$Perfil == 'Entreprise') {
+#      h4(vars$Question_Entreprise[1]) 
+#      #vars <-  vars %>% mutate(Questions_description = Question_Entreprise)
+#    }
+# })
+
+
+saveData <- function(data) {
+  data <- as.data.frame(t(data))
+  if (exists("responses")) {
+    responses <<- rbind(responses, data)
+  } else {
+    responses <<- data
+  }
+  
+  write_csv(responses, "respuestas.csv")
+}
+
+loadData <- function() {
+  if (exists("responses")) {
+    responses
+  }
+}
+
+# Whenever a field is filled, aggregate all form data
+formData <- reactive({
+    data <- sapply(Test$ID, function(x) input[[x]])
+      data
+})
+      
+# When the Submit button is clicked, save the form data
+observeEvent(input$submit, {
+  saveData(formData())
+})
+
+
+# Show the previous responses
+    # (update with current response when Submit is clicked)
+    output$responses <- DT::renderDataTable({
+      input$submit
+      loadData()
+    })     
+
+  
+```
 
 
 

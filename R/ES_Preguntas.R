@@ -16,4 +16,4 @@ ES_Preguntas <- function(i=1,j=2, ... ){
 
 
 # Ejemplo de Uso del Excel
-#Preguntas(1, 3)$Code[1], Preguntas(1, 3)$`Simple descriptor`[1]
+#Preg <- ES_Preguntas(1, 3)$Code[1], Preguntas(1, 3)$`Simple descriptor`[1]
